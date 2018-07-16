@@ -64,14 +64,21 @@ def write_sum(sum):
 
 def notify_client (value, sum):
     try: 
-        notify = dict()
-        notify["value"] = value
-        notify["sum"] = sum
-        notify["timestmap"] = str(int(time.time()))
-        pp.pprint (notify)
-        not_str = json.dumps (notify)
-        with open(localwebroot+"/newcoin.json", 'w') as f:
-            json.dump(notify, f)
+#        notify = dict()
+#        notify["value"] = value
+#        notify["sum"] = sum
+#        notify["timestmap"] = str(int(time.time()))
+#        pp.pprint (notify)
+#        not_str = json.dumps (notify)
+
+         notifystr = '<?xml version=\1.0" encoding="utf-8" ?><newcoin timestamp="'+str(int(time.time())) +'" sum="'+ str(sum)+'" value= "'+str(value)+'"></newcoin>'
+         print (notifystr)
+
+         file = open(localwebroot+"/newcoin.xml", 'w')
+         file.write (notifystr)
+         file.close()
+
+
     except:
        print  "Internal error "+traceback.format_exc()     
     
