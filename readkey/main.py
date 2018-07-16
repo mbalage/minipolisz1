@@ -71,7 +71,7 @@ def notify_client (value, sum):
 #        pp.pprint (notify)
 #        not_str = json.dumps (notify)
 
-         notifystr = '<?xml version="1.0" encoding="utf-8" ?><newcoin timestamp="'+str(int(time.time())) +'" sum="'+ str(sum)+'" value= "'+str(value)+'"></newcoin>'
+         notifystr = '<?xml version="1.0" encoding="utf-8" ?><newcoin timestamp="'+str(int(time.time())) +'" sum="'+ str(sum)+'" value="'+str(value)+'"></newcoin>'
          print (notifystr)
 
          file = open(localwebroot+"/newcoin.xml", 'w')
