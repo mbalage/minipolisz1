@@ -1,3 +1,4 @@
+import time
 import sys
 import re
 import urllib
@@ -11,7 +12,7 @@ import pprint
 sum = 0;
 
 pp = pprint.PrettyPrinter(indent=4)
-
+localwebroot = "/var/www/html"
 
 
 
@@ -58,6 +59,24 @@ def write_sum(sum):
     except:
        print  "Internal error "+traceback.format_exc()
     
+
+
+
+def notify_client (value, sum):
+    try: 
+        notify = dict()
+        notify["value"] = value
+        notify["sum"] = sum
+        notify["timestmap"] = str(int(time.time()))
+        pp.pprint (notify)
+        not_str = json.dumps (notify)
+        with open(localwebroot+"/newcoin.json", 'w') as f:
+            json.dump(notify, f)
+    except:
+       print  "Internal error "+traceback.format_exc()     
+    
+    
+
     
 print "Coin 1.0 ***"
 
@@ -98,6 +117,9 @@ while True:
         
         print "Az uj SUM: "+str(sum)
         write_sum (sum) 
+        
+        #write a json file with now timestamp to local web server - client picks it up
+        notify_client (val, sum)
         
         print ()
         
